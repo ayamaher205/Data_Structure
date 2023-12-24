@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1703423212 source:e:\iti\cpp\bubblesort\main.cpp
+	<iostream>
+	"Employee.h"
+	<bits/stdc++.h>
+
+1703419286 e:\iti\cpp\bubblesort\include\employee.h
+
