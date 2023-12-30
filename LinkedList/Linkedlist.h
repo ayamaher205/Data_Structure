@@ -8,7 +8,6 @@ template <class T>
 class linkedList{
 node<T>* head;
 node<T>* tail;
-int count = 0;
 public:
 // constructor
 linkedList(){
@@ -22,9 +21,9 @@ linkedList(linkedList<T> &l){
     if(!(l.isEmpty()))
    {
     node<T>* temp = l.head;
-    while(temp->next != nullptr ){
+    while(temp != nullptr ){
         this->push_back(temp->data);
-     temp = temp->next;
+        temp = temp->next;
     }   
   }
 }
@@ -35,7 +34,6 @@ bool isEmpty(){
     return false;
 }
 void push_front(T value){
-    count++;
     node<T>* temp=new node<T>();
     temp->data=value;
     if(isEmpty()){
@@ -48,7 +46,6 @@ void push_front(T value){
     }
 }
 void push_back(T value){
-    count++;
     node<T>* temp = new node<T>();
     temp->data = value;
     if(isEmpty()){
@@ -62,11 +59,9 @@ void push_back(T value){
     }
 }
 void inesrt(int nodeBefore ,T value){
-    if(isEmpty())
-    cout<<"sorry, there is no such node, list is empty\n";
-    else
+    int check = search(nodeBefore);
+    if( 2 == check )
     {
-        count++;
         node<T>* temp2 = new node<T>();
         temp2->data =value;
         node<T>* temp = new node<T>();
@@ -87,10 +82,7 @@ void inesrt(int nodeBefore ,T value){
             temp2->next->prev = temp2;
             temp->next = temp2;
         }
-        else 
-        {
-            cout<<"no such node\n";
-        }
+        cout<<" and inserted node after it\n";
     }
 }
 void pop_front(){
@@ -118,24 +110,19 @@ void pop_back(){
     }
 }
 void remove(int nodeValue){
- if(isEmpty())
-    cout<<"list is empty\n";
-    else
-    {
+    int check = search(nodeValue);
+        if( 2 == check )
+        {
         node<T>* temp = new node<T>();
         temp = head;
         while(temp->data != nodeValue && temp->next != nullptr){
             temp = temp->next;
         }
-        if(temp->next == nullptr)
-        cout<<"no such value\n";
-        else
-        {
             temp->prev->next = temp->next;
             temp->next->prev = temp->prev;
+            cout<<" and removed succefully\n";
         }
         }   
-}
 void display(){
     if(isEmpty())
     cout<<"list is empty\n";
@@ -161,9 +148,12 @@ void clear(){
         }
     }
 }
-void search(int value){
+int search(int value){
     if(isEmpty())
-    cout<<"list is empty\n";
+    {
+        cout<<"list is Empty\n";
+        return 0;
+    }
     else
     {
         node<T>* temp = new node<T>();
@@ -172,9 +162,15 @@ void search(int value){
             temp = temp->next;
         }
         if(temp->next == nullptr)
-        cout<<"no such value\n";
+        {   
+            cout<<"no such value\n";
+            return 1;
+            }
         else
-        cout<<"node found\n";
+        {
+            cout<<"value found";
+            return 2;
+        }
 }
 }
 void swapNodes(T &node1,T &node2){

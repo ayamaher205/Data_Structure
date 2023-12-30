@@ -15,6 +15,18 @@ public:
         head = nullptr;
         tail = nullptr;
     }
+    Queue(Queue<T> &q){
+        head = nullptr;
+        tail = nullptr;
+    if(!(q.isEmpty()))
+   {
+        Node<T>* temp = q.head;
+        while(temp != nullptr ){
+        this->enqueue(temp->data);
+        temp = temp->ptr;
+    }   
+  }
+    }
     bool isEmpty(){
         if(tail == nullptr)
         return true;
@@ -38,7 +50,7 @@ public:
         {
             Node<T>* temp = new Node<T>();
             temp = head;
-            head = head->ptr;
+            head = head->ptr ;
             delete temp;
         }
     }
@@ -49,9 +61,9 @@ public:
         {
             Node<T>* temp = new Node<T>();
             temp=head;
-            while(head !=nullptr){
-                cout<<head->data<<endl;
-                head = head->ptr;
+            while(temp !=nullptr){
+                cout<<temp->data<<endl;
+                temp = temp->ptr;
             }
         }
     }

@@ -12,16 +12,40 @@ public:
         Stack() {
             top=nullptr;
         }
- /*        Stack(stack<T> &s) {
+        // copy constructor 
+    /* Stack(Stack<T> &s) {
             top=nullptr;
             if(!(s.isEmpty())){
                 Node<T>* temp = s.top;
-                Stack<T> temp = new Stack();
-                while(temp->ptr != nullptr)
-                    temp = s.top;
+                Stack<T> tempStack;
+                while(temp != nullptr){
+                    tempStack.push(temp->data);
+                    temp = temp->ptr;
+                }
+                temp = tempStack.top;
+                while(temp != nullptr){
+                    push(temp->data);
+                    temp = temp->ptr;
+                }
             }
-        } */
-
+        } 
+ */
+        Stack(Stack<T> &s) {
+            top=nullptr;
+            if(!(s.isEmpty())){
+                top = s.top;
+                Node<T>* temp = new Node<T>();
+                Node<T>* temp2 = new Node<T>();
+                temp = s.top;
+                // top->ptr = temp;
+                temp2=top;
+                while(temp != nullptr){
+                    temp = temp->ptr;
+                    temp2->ptr = temp;
+                    temp2 = temp; 
+                }
+            }
+        }
     bool isEmpty(){
         if(top == nullptr)
         return true;
@@ -58,10 +82,15 @@ public:
             Node<T>* temp = new Node<T>();
             temp=top;
             while(temp !=nullptr){
-                cout<<temp->data<<endl;
+                cout<<temp->data<<"  ";
                 temp = temp->ptr;
             }
+            cout<<"\n";
         }
+    }
+    // return top 
+    void front(){
+        cout<<top->data<<endl;
     }
          ~Stack() {}
 
