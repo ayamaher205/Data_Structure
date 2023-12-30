@@ -12,6 +12,16 @@ public:
         Stack() {
             top=nullptr;
         }
+ /*        Stack(stack<T> &s) {
+            top=nullptr;
+            if(!(s.isEmpty())){
+                Node<T>* temp = s.top;
+                Stack<T> temp = new Stack();
+                while(temp->ptr != nullptr)
+                    temp = s.top;
+            }
+        } */
+
     bool isEmpty(){
         if(top == nullptr)
         return true;
@@ -26,7 +36,7 @@ public:
         }
         else {
             temp->ptr = top;
-            top =temp;
+            top = temp;
         }
     }
     void pop(){

@@ -18,7 +18,17 @@ int main(){
  list.pop_front();
  list.pop_back();
  list.display();
- list.clear();
+ list.inesrt(4,22);
+ list.inesrt(5,22);
  list.display();
+ linkedList <int>l(list);
+ l.push_front(7);
+ l.push_back(8);
+ l.display(); 
+ list.display();
+ l.bubbleSort();
+ l.display();
+ list.clear();
+ list.display(); 
    return 0;
 }

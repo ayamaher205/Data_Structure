@@ -8,12 +8,25 @@ template <class T>
 class linkedList{
 node<T>* head;
 node<T>* tail;
+int count = 0;
 public:
+// constructor
 linkedList(){
     head = nullptr;
+    tail = nullptr;
 }
-linkedList(linkedList &l){
-    
+// copy constructor 
+linkedList(linkedList<T> &l){
+    head = nullptr;
+    tail = nullptr;
+    if(!(l.isEmpty()))
+   {
+    node<T>* temp = l.head;
+    while(temp->next != nullptr ){
+        this->push_back(temp->data);
+     temp = temp->next;
+    }   
+  }
 }
 bool isEmpty(){
     if(head==nullptr)
@@ -22,6 +35,7 @@ bool isEmpty(){
     return false;
 }
 void push_front(T value){
+    count++;
     node<T>* temp=new node<T>();
     temp->data=value;
     if(isEmpty()){
@@ -34,6 +48,7 @@ void push_front(T value){
     }
 }
 void push_back(T value){
+    count++;
     node<T>* temp = new node<T>();
     temp->data = value;
     if(isEmpty()){
@@ -46,27 +61,36 @@ void push_back(T value){
         tail = temp ;
     }
 }
-void inesrt(int nodeDefore ,T value){
+void inesrt(int nodeBefore ,T value){
     if(isEmpty())
     cout<<"sorry, there is no such node, list is empty\n";
     else
     {
+        count++;
+        node<T>* temp2 = new node<T>();
+        temp2->data =value;
         node<T>* temp = new node<T>();
         temp = head;
-        while(temp->data != nodeDefore && temp->next != nullptr){
+        while(temp->data != nodeBefore && temp->next != nullptr){
             temp = temp->next;
         }
-        if(temp->next == nullptr)
-        cout<<"no such value\n";
-        else 
+        // check if this tail or not
+            if(temp->data == nodeBefore && temp->next == nullptr)
+            {   
+                temp2->prev = tail;
+                tail->next = temp2;
+                tail = temp2 ;
+            }
+        else if (temp->next != nullptr)
         {
-            node<T>* temp2 = new node<T>();
-            temp2->data =value;
             temp2->next = temp->next;
             temp2->next->prev = temp2;
             temp->next = temp2;
         }
-
+        else 
+        {
+            cout<<"no such node\n";
+        }
     }
 }
 void pop_front(){
@@ -153,5 +177,36 @@ void search(int value){
         cout<<"node found\n";
 }
 }
+void swapNodes(T &node1,T &node2){
+ T temp = node1;
+ node1 = node2;
+ node2 = temp;
+}
+void bubbleSort(){
+node<T>* temp = head;
+while(temp->next != nullptr){
+node<T>* temp2 = head;
+    while(temp2->next != nullptr){
+            if(temp2->next->data < temp2->data){
+                swapNodes(temp2->next->data,temp2->data);
+            }
+            temp2 = temp2->next;
+        }
+        temp = temp->next;
+    }
+}
+/* void bubbleSortFor(){
+    node<T>* temp = tail;
+    for(int i = count; i>0;i--){
+        node<T>* temp2 = tail;
+        for(int j = count-1; j>0 ; j--){
+            if(temp2->next->data > temp2->data ){
+                swapNodes(temp2->next->data , temp2->data);
+            }
+            temp2 = temp2->prev;
+        }
+    temp = temp->prev;
+}
+    } */
 };
 #endif
